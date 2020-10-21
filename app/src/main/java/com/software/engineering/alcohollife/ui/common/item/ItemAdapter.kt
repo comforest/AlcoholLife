@@ -1,4 +1,4 @@
-package com.software.engineering.alcohollife.ui.category
+package com.software.engineering.alcohollife.ui.common.item
 
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +9,7 @@ import com.software.engineering.alcohollife.model.data.CategoryData
 import com.software.engineering.alcohollife.ui.common.BaseViewHolder
 import kotlinx.android.synthetic.main.item_category.*
 
-class CategoryAdapter : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
+class ItemAdapter : RecyclerView.Adapter<ItemAdapter.CategoryViewHolder>() {
     private var list: List<CategoryData>? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
@@ -25,7 +25,10 @@ class CategoryAdapter : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>
         val data = list!![position]
 
         holder.textivew_category_name.text = data.name
-        holder.textivew_category_name.text = data.name
+        holder.textivew_category_type.text = data.type
+
+        holder.textview_category_rating_score.text = data.rating.toString()
+        holder.textview_category_rating_voter.text = "(${data.voter})"
     }
 
     fun setData(list: List<CategoryData>) {

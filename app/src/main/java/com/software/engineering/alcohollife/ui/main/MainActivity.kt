@@ -34,7 +34,9 @@ class MainActivity : BaseActivity() {
     }
 
     fun goToCategory() {
-        // TODO : change Fragment
+        supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_main, categoryFragment)
+                .commit()
     }
 
     fun goToMain() {
