@@ -4,11 +4,13 @@ import android.os.Bundle
 import com.software.engineering.alcohollife.R
 import com.software.engineering.alcohollife.ui.base.BaseActivity
 import com.software.engineering.alcohollife.ui.category.CategoryFragment
+import com.software.engineering.alcohollife.ui.mypage.MyPageFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() {
 
     private val categoryFragment by lazy { CategoryFragment() }
+    private val myPageFragment by lazy { MyPageFragment() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,6 +46,8 @@ class MainActivity : BaseActivity() {
     }
 
     fun goToMyPage() {
-        // TODO : change Fragment
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_main, myPageFragment)
+            .commit()
     }
 }

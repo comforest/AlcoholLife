@@ -3,4 +3,7 @@
     <string name="all_category">카테고리</string>
     <string name="all_main">메인</string>
     <string name="all_mypage">마이 페이지</string>
+    <string name="all_review">리뷰</string>
+    <string name="all_story">스토리</string>
+    <string name="all_favorite">찜</string>
 </resources>
