@@ -1,28 +1,30 @@
 package com.software.engineering.alcohollife.util;
 
 
+import android.util.Log;
+
 import com.software.engineering.alcohollife.BuildConfig;
 
-public class Log {
+public class LogUtil {
     private static boolean DEBUG = BuildConfig.DEBUG;
 
     public static void v(String tag, String msg) {
-        android.util.Log.v(tag, msg);
+        if(DEBUG) Log.v(tag, msg);
     }
 
     public static void d(String tag, String msg) {
-        android.util.Log.d(tag, msg);
+        if(DEBUG) Log.d(tag, msg);
     }
 
     public static void i(String tag, String msg) {
-        android.util.Log.d(tag, msg);
+        if(DEBUG) Log.d(tag, msg);
     }
 
     public static void w(String tag, String msg) {
-        android.util.Log.d(tag, msg);
+        if(DEBUG) Log.d(tag, msg);
     }
 
     public static void e(String tag, String msg) {
-        android.util.Log.e(tag, msg);
+        if(DEBUG) Log.e(tag, msg);
     }
 }

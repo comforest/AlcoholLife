@@ -1,12 +1,8 @@
 package com.software.engineering.alcohollife.model.network.base
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.software.engineering.alcohollife.util.Log
-import doubleslash05.mini.team11.util.LogUtils
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import retrofit2.*
 import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type

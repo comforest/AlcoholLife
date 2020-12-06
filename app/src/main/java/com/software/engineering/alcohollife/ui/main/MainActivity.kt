@@ -10,6 +10,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : BaseActivity() {
 
     private val categoryFragment by lazy { CategoryFragment() }
+    private val mainFragment by lazy { MainFragment() }
     private val myPageFragment by lazy { MyPageFragment() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,7 +43,9 @@ class MainActivity : BaseActivity() {
     }
 
     fun goToMain() {
-        // TODO : change Fragment
+        supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_main, mainFragment)
+                .commit()
     }
 
     fun goToMyPage() {

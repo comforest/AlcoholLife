@@ -37,5 +37,4 @@ class StoryListFragment : BaseFragment() {
         super.onStart()
         adapter.setData(AlcoholSimpleData.getSampleList())
     }
-
 }
