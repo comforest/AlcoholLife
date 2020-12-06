@@ -1,4 +1,4 @@
-package com.software.engineering.alcohollife.ui.common
+package com.software.engineering.alcohollife.ui.base
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView

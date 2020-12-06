@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.software.engineering.alcohollife.R
 import com.software.engineering.alcohollife.model.data.CategoryData
-import com.software.engineering.alcohollife.ui.common.BaseViewHolder
+import com.software.engineering.alcohollife.ui.base.BaseViewHolder
 import kotlinx.android.synthetic.main.item_category.*
 
 class ItemAdapter : RecyclerView.Adapter<ItemAdapter.CategoryViewHolder>() {

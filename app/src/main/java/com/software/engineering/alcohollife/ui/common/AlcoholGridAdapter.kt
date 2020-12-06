@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.software.engineering.alcohollife.R
 import com.software.engineering.alcohollife.model.data.AlcoholSimpleData
-import com.software.engineering.alcohollife.util.Log
+import com.software.engineering.alcohollife.ui.base.BaseViewHolder
 import kotlinx.android.synthetic.main.item_alcohol_grid_card.*
 
 class AlcoholGridAdapter : RecyclerView.Adapter<BaseViewHolder>() {
