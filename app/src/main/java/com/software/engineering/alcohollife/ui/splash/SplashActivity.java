@@ -1,17 +1,14 @@
 package com.software.engineering.alcohollife.ui.splash;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.PersistableBundle;
-import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.software.engineering.alcohollife.ui.main.MainActivity;
-import com.software.engineering.alcohollife.util.LogUtil;
+import com.software.engineering.alcohollife.R;
 
 
 public class SplashActivity extends AppCompatActivity {
@@ -22,9 +19,7 @@ public class SplashActivity extends AppCompatActivity {
         new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(SplashActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();
+                // TODO : Activity 이동
             }
         }, 1000);
     }

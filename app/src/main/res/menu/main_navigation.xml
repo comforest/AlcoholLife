@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_category"
+        android:enabled="true"
+        android:title="@string/all_category"/>
+    <item
+        android:id="@+id/menu_main"
+        android:enabled="true"
+        android:title="@string/all_main"/>
+    <item
+        android:id="@+id/menu_mypage"
+        android:enabled="true"
+        android:title="@string/all_mypage"/>
+</menu>

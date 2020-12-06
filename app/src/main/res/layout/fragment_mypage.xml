@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/gray"
+        android:orientation="vertical">
+
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:paddingVertical="20dp"
+            android:paddingLeft="20dp"
+            android:textSize="20sp"
+            tools:text="Alcohol" />
+
+    <androidx.gridlayout.widget.GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@color/white"
+            app:columnCount="3"
+            app:orientation="horizontal"
+            app:rowCount="2"
+            app:useDefaultMargins="true">
+
+        <TextView
+                android:id="@+id/textview_mypage_review"
+                style="@style/MyPageTextDetail"
+                tools:text="120" />
+
+
+        <TextView
+                android:id="@+id/textview_mypage_story"
+                style="@style/MyPageTextDetail"
+                tools:text="120" />
+
+        <TextView
+                android:id="@+id/textview_mypage_favorite"
+                style="@style/MyPageTextDetail"
+                tools:text="120" />
+
+        <TextView
+                style="@style/MyPageTextDetail"
+                android:text="@string/all_review" />
+
+        <TextView
+                style="@style/MyPageTextDetail"
+                android:text="@string/all_story" />
+
+
+        <TextView
+                style="@style/MyPageTextDetail"
+                android:text="@string/all_favorite" />
+    </androidx.gridlayout.widget.GridLayout>
+
+
+    <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tablayout_mypage"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/white" />
+
+
+    <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewpager_mypage"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+</LinearLayout>
