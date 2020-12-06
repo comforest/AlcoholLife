@@ -1,8 +1,10 @@
-package com.software.engineering.alcohollife;
+package com.software.engineering.alcohollife.ui.review;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.software.engineering.alcohollife.R;
 
 public class WriteReview extends AppCompatActivity {
 

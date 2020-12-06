@@ -34,12 +34,18 @@ class MainActivity : BaseActivity() {
 
             return@setOnNavigationItemSelectedListener true
         }
+
+        goToMain()
     }
 
     fun goToCategory() {
         supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_main, categoryFragment)
                 .commit()
+    }
+
+    fun goToCategory(category: String){
+        goToCategory()
     }
 
     fun goToMain() {

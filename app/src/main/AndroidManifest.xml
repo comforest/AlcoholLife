@@ -10,9 +10,9 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
 
-        <activity android:name=".WriteStory" />
-        <activity android:name=".WriteReview" />
-        <activity android:name=".ItemPage" />
+        <activity android:name=".ui.review.WriteStory" />
+        <activity android:name=".ui.review.WriteReview" />
+        <activity android:name=".ui.review.ItemPage" />
 
         <activity android:name=".ui.main.MainActivity">
             <intent-filter>
