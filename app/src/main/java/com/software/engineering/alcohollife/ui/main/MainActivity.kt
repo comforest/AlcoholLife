@@ -1,6 +1,7 @@
 package com.software.engineering.alcohollife.ui.main
 
 import android.os.Bundle
+import android.view.View
 import com.software.engineering.alcohollife.R
 import com.software.engineering.alcohollife.ui.base.BaseActivity
 import com.software.engineering.alcohollife.ui.category.CategoryFragment
@@ -8,10 +9,6 @@ import com.software.engineering.alcohollife.ui.mypage.MyPageFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() {
-
-    private val categoryFragment by lazy { CategoryFragment() }
-    private val mainFragment by lazy { MainFragment() }
-    private val myPageFragment by lazy { MyPageFragment() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,24 +36,25 @@ class MainActivity : BaseActivity() {
     }
 
     fun goToCategory() {
-        supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_main, categoryFragment)
-                .commit()
+        fragment_main_category.view?.visibility = View.VISIBLE
+        fragment_main_main.view?.visibility = View.GONE
+        fragment_main_mypage.view?.visibility = View.GONE
     }
 
     fun goToCategory(category: String){
         goToCategory()
+        (fragment_main_category as CategoryFragment).setPage(category)
     }
 
     fun goToMain() {
-        supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_main, mainFragment)
-                .commit()
+        fragment_main_category.view?.visibility = View.GONE
+        fragment_main_main.view?.visibility = View.VISIBLE
+        fragment_main_mypage.view?.visibility = View.GONE
     }
 
     fun goToMyPage() {
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_main, myPageFragment)
-            .commit()
+        fragment_main_category.view?.visibility = View.GONE
+        fragment_main_main.view?.visibility = View.GONE
+        fragment_main_mypage.view?.visibility = View.VISIBLE
     }
 }
