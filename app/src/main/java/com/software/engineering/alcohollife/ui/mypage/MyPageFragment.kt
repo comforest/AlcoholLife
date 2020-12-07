@@ -42,20 +42,31 @@ class MyPageFragment : BaseFragment() {
         textview_mypage_favorite.text = "!23"
     }
 
+    //
+//    override fun onSaveInstanceState(outState: Bundle) {
+//        outState.putParcelable("VIEW_PAGER", adapter.saveState())
+//        super.onSaveInstanceState(outState)
+//
+//    }
+//
+//    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+//        val b = savedInstanceState?.getParcelable<Bundle>("VIEW_PAGER")
+//        b?.let { adapter.restoreState(b) }
+//
+//        super.onViewStateRestored(savedInstanceState)
+//    }
+//
     inner class ViewPagerAdapter : FragmentStateAdapter(this) {
-        private val fragmentList = listOf(
-//            ItemListFragment(),
-//            ItemListFragment()
-            StoryListFragment(),
-            StoryListFragment()
-        )
+        //        override fun getItemId(position: Int): Long {
+//            return fragmentList[position].id.toLong()
+//        }
 
         override fun getItemCount(): Int {
-            return fragmentList.size
+            return 2
         }
 
         override fun createFragment(position: Int): Fragment {
-            return fragmentList[position]
+            return StoryListFragment()
         }
     }
 }

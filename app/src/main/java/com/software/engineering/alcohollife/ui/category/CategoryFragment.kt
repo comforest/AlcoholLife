@@ -22,6 +22,7 @@ class CategoryFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewpager_category.orientation = ViewPager2.ORIENTATION_HORIZONTAL
         viewpager_category.adapter = ViewPagerAdapter()
+        viewpager_category.isSaveEnabled = false
 
         TabLayoutMediator(tablayout_category, viewpager_category) { tab, position ->
             tab.text = when (position) {

@@ -35,7 +35,7 @@ class MainActivity : BaseActivity() {
             return@setOnNavigationItemSelectedListener true
         }
 
-        goToMain()
+        navigation_main.selectedItemId = R.id.menu_main
     }
 
     fun goToCategory() {
