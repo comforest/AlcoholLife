@@ -3,6 +3,9 @@ package com.software.engineering.alcohollife.model.network.base
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import retrofit2.*
 import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
@@ -21,11 +24,12 @@ class LiveDataCallAdapter<R>(private val responseType: Type) : CallAdapter<R, Li
             }
 
             override fun onResponse(call: Call<R>, response: Response<R>) {
+                CoroutineScope(Dispatchers.Main).launch {
 
                     val code = response.code()
                     if (response.isSuccessful) {
                         liveData.value = ApiStatus.Success(code, response.body()!!)
-                        return
+                        return@launch
                     }
 
                     // Error 처리
@@ -35,6 +39,7 @@ class LiveDataCallAdapter<R>(private val responseType: Type) : CallAdapter<R, Li
                         401 -> {
                         }
                     }
+                }
                 }
 
         })
