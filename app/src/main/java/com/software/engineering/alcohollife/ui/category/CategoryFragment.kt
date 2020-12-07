@@ -18,7 +18,12 @@ class CategoryFragment : BaseFragment() {
     private val categoryList = listOf(
         "소주",
         "맥주",
-        "양주"
+        "막걸리"
+    )
+    private val categoryEnglishList = listOf(
+        "soju",
+        "beer",
+        "Makgeolli"
     )
 
     override fun onCreateView(
@@ -46,7 +51,7 @@ class CategoryFragment : BaseFragment() {
         }
 
         override fun createFragment(position: Int): Fragment {
-            return ItemListFragment()
+            return ItemListFragment.getInstance(categoryEnglishList[position])
         }
     }
 

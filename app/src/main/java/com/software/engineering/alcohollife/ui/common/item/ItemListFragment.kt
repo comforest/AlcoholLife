@@ -6,17 +6,26 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.software.engineering.alcohollife.R
 import com.software.engineering.alcohollife.model.data.CategoryData
+import com.software.engineering.alcohollife.model.network.base.ApiStatus
+import com.software.engineering.alcohollife.model.network.base.RestClient
 import com.software.engineering.alcohollife.ui.base.BaseFragment
-import com.software.engineering.alcohollife.ui.common.item.ItemAdapter
 import com.software.engineering.alcohollife.ui.review.ItemPage
 import kotlinx.android.synthetic.main.fragment_recyclerview.view.*
 
-class ItemListFragment : BaseFragment() {
+class ItemListFragment private constructor(): BaseFragment() {
+    private val model = RestClient.getDrinkService()
     private val adapter by lazy { ItemAdapter() }
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    private val category by lazy { arguments!!.getString(ARGUMENTS_CATEGORY)!! }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_recyclerview, container, false)
     }
 
@@ -26,14 +35,29 @@ class ItemListFragment : BaseFragment() {
         view.recyclerview.adapter = adapter
 
         adapter.setOnitemClickListener {
-            Toast.makeText(context,"Test",Toast.LENGTH_SHORT);
-            val intent = Intent(context, ItemPage::class.java)
+            val intent = ItemPage.getStartIntent(context, it.name)
             startActivity(intent)
         }
     }
 
     override fun onStart() {
         super.onStart()
-        adapter.setData(CategoryData.getSampleList())
+
+        model.getCategory(category).observe(viewLifecycleOwner, Observer {
+            when(it){
+                is ApiStatus.Success-> {
+                    adapter.setData(it.data.list)
+                }
+            }
+        })
+    }
+
+    companion object {
+        private const val ARGUMENTS_CATEGORY = "ARGUMENTS_CATEGORY"
+        fun getInstance(category: String) = ItemListFragment().apply {
+            arguments = Bundle().apply {
+                putString(ARGUMENTS_CATEGORY, category)
+            }
+        }
     }
 }

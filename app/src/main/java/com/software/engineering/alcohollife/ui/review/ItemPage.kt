@@ -4,11 +4,13 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.software.engineering.alcohollife.R
 import com.software.engineering.alcohollife.model.data.ItemData
 import com.software.engineering.alcohollife.model.network.base.RestClient
+import kotlinx.android.synthetic.main.activity_item_page.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -47,13 +49,18 @@ class ItemPage : AppCompatActivity() {
     }
 
     fun setData(data : ItemData){
+        Glide.with(this)
+            .load(data.image)
+            .into(imageView2)
 
+        item_name.text = data.name
+        item_name2.text = data.name
     }
 
     companion object {
         private const val EXTRA_NAME = "EXTRA_NAME"
-        fun getStartIntent(context: Context, alcohol: String): Intent {
-            return Intent(context, this::class.java).apply {
+        fun getStartIntent(context: Context?, alcohol: String): Intent {
+            return Intent(context, ItemPage::class.java).apply {
                 putExtra(EXTRA_NAME, alcohol)
             }
 
