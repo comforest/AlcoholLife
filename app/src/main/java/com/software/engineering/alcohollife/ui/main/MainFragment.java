@@ -41,7 +41,7 @@ public class MainFragment extends Fragment {
         getView().findViewById(R.id.wine).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity) getActivity()).goToCategory("양주");
+                ((MainActivity) getActivity()).goToCategory("막걸리");
             }
         });
 
