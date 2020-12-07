@@ -11,7 +11,9 @@
             android:theme="@style/AppTheme">
 
         <activity android:name=".ui.review.WriteStory" />
-        <activity android:name=".ui.review.WriteReview" />
+        <activity android:name=".ui.review.WriteReview">
+
+        </activity>
         <activity android:name=".ui.review.ItemPage" />
 
         <activity android:name=".ui.main.MainActivity">
