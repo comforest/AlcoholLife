@@ -11,6 +11,7 @@ import kotlinx.android.synthetic.main.item_category.*
 
 class ItemAdapter : RecyclerView.Adapter<ItemAdapter.CategoryViewHolder>() {
     private var list: List<CategoryData>? = null
+    private var onItemClickListener: (() -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.item_category, parent, false)
@@ -29,11 +30,19 @@ class ItemAdapter : RecyclerView.Adapter<ItemAdapter.CategoryViewHolder>() {
 
         holder.textview_category_rating_score.text = data.rating.toString()
         holder.textview_category_rating_voter.text = "(${data.voter})"
+
+        holder.containerView.setOnClickListener {
+            onItemClickListener?.invoke()
+        }
     }
 
     fun setData(list: List<CategoryData>) {
         this.list = list
         notifyDataSetChanged()
+    }
+
+    fun setOnitemClickListener(listener: (() -> Unit)?) {
+        onItemClickListener = listener
     }
 
     inner class CategoryViewHolder(v: View) : BaseViewHolder(v)
