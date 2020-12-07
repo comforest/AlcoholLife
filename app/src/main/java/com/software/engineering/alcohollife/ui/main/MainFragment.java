@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -29,6 +30,20 @@ public class MainFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 ((MainActivity) getActivity()).goToCategory("소주");
+            }
+        });
+
+        SearchView searchView = (SearchView)view.findViewById(R.id.searchView2);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                search(s);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                return true;
             }
         });
     }
