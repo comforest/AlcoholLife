@@ -35,7 +35,7 @@ object RestClient {
                 build()
             }
 
-            baseUrl("3.35.139.156:8000/") // 도메인 주소
+            baseUrl("3.35.139.156:6974") // 도메인 주소
             client(client)
 
             addCallAdapterFactory(LiveDataCallAdapter.Factory())
