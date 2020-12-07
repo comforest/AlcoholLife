@@ -32,7 +32,21 @@ public class MainFragment extends Fragment {
                 ((MainActivity) getActivity()).goToCategory("소주");
             }
         });
+        getView().findViewById(R.id.beer).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MainActivity) getActivity()).goToCategory("맥주");
+            }
+        });
+        getView().findViewById(R.id.wine).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MainActivity) getActivity()).goToCategory("양주");
+            }
+        });
 
+
+        //서치함수 연결
         SearchView searchView = (SearchView)view.findViewById(R.id.searchView2);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
