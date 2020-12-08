@@ -1,17 +1,24 @@
 package com.software.engineering.alcohollife.ui.review
 
+import android.app.Application
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import android.widget.EditText
+import android.widget.RatingBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 import com.software.engineering.alcohollife.R
 import com.software.engineering.alcohollife.model.data.ReviewData
+import com.software.engineering.alcohollife.model.data.ReviewPostData
+import com.software.engineering.alcohollife.model.network.base.ApiStatus
 import com.software.engineering.alcohollife.model.network.base.RestClient
+import kotlinx.android.synthetic.main.activity_item_page.*
 import kotlinx.android.synthetic.main.activity_write_review.*
 
 class WriteReview : AppCompatActivity() {
@@ -30,6 +37,9 @@ class WriteReview : AppCompatActivity() {
         supportActionBar?.setDisplayShowTitleEnabled(false)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+        val ratingBar = findViewById<RatingBar>(R.id.rating_bar)
+        val editText = findViewById<EditText>(R.id.editTextTextPersonName)
+
         textView.text = alcoholName
 
         Glide.with(this)
@@ -39,17 +49,28 @@ class WriteReview : AppCompatActivity() {
 
 
         button2.setOnClickListener {
-            review_submit()
+            review_submit(ratingBar.rating, alcoholName, editText.text.toString())
         }
     }
 
-    fun review_submit() {
-
+    fun review_submit(rating:Float, name:String, review_text:String) {
+        model.reviewPost(ReviewPostData(rating, name, review_text)).observe(this, Observer {
+            when (it) {
+                is ApiStatus.Success -> {
+                    Toast.makeText(applicationContext, "리뷰등록이 완료되었습니다.", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+            }
+        })
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.home -> finish()
+        val id = item.itemId
+        when (id) {
+            android.R.id.home -> {
+                finish()
+                return true
+            }
         }
         return super.onOptionsItemSelected(item)
     }

@@ -48,4 +48,9 @@ interface DrinkRetrofit {
     @POST("manageuser/logout/")
     fun logout(): ApiLiveData<Any>
 
+    @POST("manageuser/review/")
+    fun reviewPost(
+        @Body reviewPostData: ReviewPostData
+    ): ApiLiveData<Any>
+
 }
