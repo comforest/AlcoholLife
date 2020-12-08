@@ -1,15 +1,14 @@
 package com.software.engineering.alcohollife.model.network
 
 import com.google.gson.JsonObject
-import com.software.engineering.alcohollife.model.data.AuthData
-import com.software.engineering.alcohollife.model.data.CategoryList
-import com.software.engineering.alcohollife.model.data.ResultContainer
-import com.software.engineering.alcohollife.model.data.ReviewData
+import com.software.engineering.alcohollife.model.data.*
 import com.software.engineering.alcohollife.model.network.base.ApiLiveData
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.POST
 import retrofit2.http.Path
+
 
 interface DrinkRetrofit {
     @GET("/drink/{alcohol}/")
@@ -35,5 +34,15 @@ interface DrinkRetrofit {
     fun getAlcoholReviews(
         @Path("alcohol") alcohol: String
     ): ApiLiveData<ResultContainer<ReviewData>>
+
+    @POST("manageuser/user/")
+    fun signUp(
+        @Body data: SignUpData
+    ): ApiLiveData<Any>
+
+    @POST("manageuser/login/")
+    fun login(
+        @Body loginData: LoginData
+    ): ApiLiveData<Any>
 
 }

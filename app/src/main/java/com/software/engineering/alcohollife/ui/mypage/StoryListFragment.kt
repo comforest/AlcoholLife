@@ -4,19 +4,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.software.engineering.alcohollife.R
 import com.software.engineering.alcohollife.model.data.AlcoholSimpleData
-import com.software.engineering.alcohollife.model.data.CategoryData
+import com.software.engineering.alcohollife.model.network.base.ApiStatus
+import com.software.engineering.alcohollife.model.network.base.RestClient
 import com.software.engineering.alcohollife.ui.base.BaseFragment
 import com.software.engineering.alcohollife.ui.common.AlcoholGridAdapter
-import com.software.engineering.alcohollife.ui.common.item.ItemAdapter
 import kotlinx.android.synthetic.main.fragment_recyclerview.*
-import kotlinx.android.synthetic.main.fragment_recyclerview.view.*
 
 class StoryListFragment : BaseFragment() {
-      private val adapter by lazy { AlcoholGridAdapter() }
+    private val model by lazy { RestClient.getDrinkService() }
+    private val adapter by lazy { AlcoholGridAdapter() }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,5 +36,11 @@ class StoryListFragment : BaseFragment() {
     override fun onStart() {
         super.onStart()
         adapter.setData(AlcoholSimpleData.getSampleList())
+
+        model.getMyReviews().observe(viewLifecycleOwner, Observer {
+            if (it is ApiStatus.Success){
+                (it).data.list[0]
+            }
+        })
     }
 }

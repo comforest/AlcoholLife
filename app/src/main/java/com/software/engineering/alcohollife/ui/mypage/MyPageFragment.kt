@@ -24,16 +24,7 @@ class MyPageFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         notifyDataSetChange()
-        viewpager_mypage.orientation = ViewPager2.ORIENTATION_HORIZONTAL
-        viewpager_mypage.adapter = ViewPagerAdapter()
 
-        TabLayoutMediator(tablayout_mypage, viewpager_mypage) { tab, position ->
-            tab.text = when (position) {
-                0 -> getString(R.string.all_story)
-                1 -> getString(R.string.all_review)
-                else -> ""
-            }
-        }.attach()
     }
 
     fun notifyDataSetChange() {
@@ -42,31 +33,4 @@ class MyPageFragment : BaseFragment() {
         textview_mypage_favorite.text = "!23"
     }
 
-    //
-//    override fun onSaveInstanceState(outState: Bundle) {
-//        outState.putParcelable("VIEW_PAGER", adapter.saveState())
-//        super.onSaveInstanceState(outState)
-//
-//    }
-//
-//    override fun onViewStateRestored(savedInstanceState: Bundle?) {
-//        val b = savedInstanceState?.getParcelable<Bundle>("VIEW_PAGER")
-//        b?.let { adapter.restoreState(b) }
-//
-//        super.onViewStateRestored(savedInstanceState)
-//    }
-//
-    inner class ViewPagerAdapter : FragmentStateAdapter(this) {
-        //        override fun getItemId(position: Int): Long {
-//            return fragmentList[position].id.toLong()
-//        }
-
-        override fun getItemCount(): Int {
-            return 2
-        }
-
-        override fun createFragment(position: Int): Fragment {
-            return StoryListFragment()
-        }
-    }
 }

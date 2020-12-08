@@ -9,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.software.engineering.alcohollife.R
@@ -74,6 +73,9 @@ class ItemPage : AppCompatActivity() {
                 is ApiStatus.Success -> {
                     val list = it.data.result
                     reviewAdapter.setData(list)
+
+                    layout_itmepage_rating.visibility =
+                        if (list.isEmpty()) View.GONE else View.VISIBLE
                     textview_itempage_nonreview.visibility =
                         if (list.isEmpty()) View.VISIBLE else View.GONE
                 }
@@ -112,7 +114,6 @@ class ItemPage : AppCompatActivity() {
             return Intent(context, ItemPage::class.java).apply {
                 putExtra(EXTRA_NAME, alcohol)
             }
-
         }
     }
 }

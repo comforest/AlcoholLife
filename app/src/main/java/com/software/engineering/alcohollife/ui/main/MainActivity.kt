@@ -42,7 +42,7 @@ class MainActivity : BaseActivity() {
     }
 
     fun goToCategory(category: String){
-        goToCategory()
+        navigation_main.selectedItemId = R.id.menu_category
         (fragment_main_category as CategoryFragment).setPage(category)
     }
 
