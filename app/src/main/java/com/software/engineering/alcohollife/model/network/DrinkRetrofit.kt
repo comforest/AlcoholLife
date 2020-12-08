@@ -45,4 +45,7 @@ interface DrinkRetrofit {
         @Body loginData: LoginData
     ): ApiLiveData<TokenData>
 
+    @POST("manageuser/logout/")
+    fun logout(): ApiLiveData<Any>
+
 }

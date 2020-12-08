@@ -41,6 +41,7 @@ object RestClient {
             baseUrl("http://3.35.139.156:6974/") // 도메인 주소
             client(client)
 
+            addConverterFactory(NullOnEmptyConverterFactory())
             addCallAdapterFactory(LiveDataCallAdapter.Factory())
             addConverterFactory(GsonConverterFactory.create()) // GSON을 사요아기 위해 ConverterFactory에 GSON 지정
             build()
