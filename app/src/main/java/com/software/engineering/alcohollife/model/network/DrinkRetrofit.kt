@@ -45,4 +45,9 @@ interface DrinkRetrofit {
         @Body loginData: LoginData
     ): ApiLiveData<Any>
 
+    @POST("manageuser/review/")
+    fun reviewPost(
+        @Body reviewPostData: ReviewPostData
+    ): ApiLiveData<Any>
+
 }
