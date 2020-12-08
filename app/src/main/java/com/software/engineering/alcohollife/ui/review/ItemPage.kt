@@ -4,15 +4,17 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
-import android.widget.TextView
-import android.widget.Toolbar
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.software.engineering.alcohollife.R
 import com.software.engineering.alcohollife.model.data.ItemData
+import com.software.engineering.alcohollife.model.network.base.ApiStatus
 import com.software.engineering.alcohollife.model.network.base.RestClient
 import kotlinx.android.synthetic.main.activity_item_page.*
 import kotlinx.coroutines.CoroutineScope
@@ -25,6 +27,7 @@ import retrofit2.Response
 class ItemPage : AppCompatActivity() {
     private val model = RestClient.getDrinkService()
     private val name by lazy { intent.getStringExtra(EXTRA_NAME) ?: "" }
+    private val reviewAdapter by lazy { ReviewAdapter() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,12 +39,14 @@ class ItemPage : AppCompatActivity() {
         ab.setDisplayShowTitleEnabled(false)
         ab.setDisplayHomeAsUpEnabled(true)
 
-        val floatingActionButton = findViewById<FloatingActionButton>(R.id.floatingActionButton2)
-        floatingActionButton.setOnClickListener{
-            val intent = Intent(this, WriteReview::class.java)
-            startActivity(intent)
-        }
 
+        recyclerview_itempage_reviews.layoutManager = LinearLayoutManager(this)
+        recyclerview_itempage_reviews.adapter = reviewAdapter
+
+    }
+
+    override fun onStart() {
+        super.onStart()
 
         val call = model.getAlcohol(name)
         call.enqueue(object : Callback<JsonObject> {
@@ -63,12 +68,23 @@ class ItemPage : AppCompatActivity() {
 
             }
         })
+
+        model.getAlcoholReviews(name).observe(this, Observer {
+            when (it) {
+                is ApiStatus.Success -> {
+                    val list = it.data.result
+                    reviewAdapter.setData(list)
+                    textview_itempage_nonreview.visibility =
+                        if (list.isEmpty()) View.VISIBLE else View.GONE
+                }
+            }
+        })
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val id = item.itemId
-        when (id){
-            android.R.id.home ->{
+        when (id) {
+            android.R.id.home -> {
                 finish()
                 return true
             }
@@ -76,10 +92,15 @@ class ItemPage : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    fun setData(data : ItemData){
+    fun setData(data: ItemData) {
         Glide.with(this)
             .load(data.image)
             .into(imageView2)
+
+        floatingActionButton2.setOnClickListener {
+            val intent = WriteReview.getStartIntent(this, name, data.image)
+            startActivity(intent)
+        }
 
         toolbar_title.text = data.name
         item_name2.text = data.name

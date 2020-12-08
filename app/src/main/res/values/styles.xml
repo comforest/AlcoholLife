@@ -16,4 +16,9 @@
         <item name="layout_gravity">fill_horizontal</item>
         <item name="android:textSize">14sp</item>
     </style>
+
+    <style name="RatingBar" parent="Theme.AppCompat">
+        <item name="colorControlNormal">#8C8C8C</item>
+        <item name="colorControlActivated">#FFE400</item>
+    </style>
 </resources>

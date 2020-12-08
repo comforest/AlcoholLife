@@ -1,6 +1,10 @@
 package com.software.engineering.alcohollife.model.data
 
-data class ReviewData(
-    val name: String,
+import com.google.gson.annotations.SerializedName
 
+data class ReviewData(
+    @SerializedName("username") val userName: String,
+    val rating: Float,
+    val content: String,
+    @SerializedName("comment_count") val commentCount: Int
 )
