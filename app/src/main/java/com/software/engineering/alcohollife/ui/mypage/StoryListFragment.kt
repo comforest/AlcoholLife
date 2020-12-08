@@ -35,11 +35,10 @@ class StoryListFragment : BaseFragment() {
 
     override fun onStart() {
         super.onStart()
-        adapter.setData(AlcoholSimpleData.getSampleList())
 
         model.getMyReviews().observe(viewLifecycleOwner, Observer {
             if (it is ApiStatus.Success){
-                (it).data.list[0]
+                adapter.setData(it.data.result)
             }
         })
     }

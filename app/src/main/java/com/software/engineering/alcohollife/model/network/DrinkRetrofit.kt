@@ -28,7 +28,7 @@ interface DrinkRetrofit {
 //    ): ApiLiveData<Any>
 
     @GET("/manageuser/reviews/")
-    fun getMyReviews(): ApiLiveData<CategoryList>
+    fun getMyReviews(): ApiLiveData<ResultContainer<AlcoholSimpleData>>
 
     @GET("/drink/{alcohol}/reviews")
     fun getAlcoholReviews(
