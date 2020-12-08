@@ -30,7 +30,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        if(App.Companion.getPrefs().getIdToken() != null){
+        if(!App.Companion.getPrefs().getIdToken().isEmpty()){
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent);
             finish();
