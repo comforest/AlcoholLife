@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -74,8 +75,6 @@ class ItemPage : AppCompatActivity() {
                     val list = it.data.result
                     reviewAdapter.setData(list)
 
-                    layout_itmepage_rating.visibility =
-                        if (list.isEmpty()) View.GONE else View.VISIBLE
                     textview_itempage_nonreview.visibility =
                         if (list.isEmpty()) View.VISIBLE else View.GONE
                 }
@@ -103,7 +102,7 @@ class ItemPage : AppCompatActivity() {
             val intent = WriteReview.getStartIntent(this, name, data.image)
             startActivity(intent)
         }
-
+        textView5.text = data.rating.toString()
         toolbar_title.text = data.name
         item_name2.text = data.name
     }

@@ -5,5 +5,6 @@ data class ItemData(
     val ABV: Float,
     val capacity: Int,
     val company: String,
-    val image: String
+    val image: String,
+    val rating: Float
 )
