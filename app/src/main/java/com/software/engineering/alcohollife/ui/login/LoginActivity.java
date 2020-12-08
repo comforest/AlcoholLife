@@ -30,6 +30,12 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        if(App.Companion.getPrefs().getIdToken() != null){
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
+
         final EditText usernameEditText = findViewById(R.id.username);
         final EditText passwordEditText = findViewById(R.id.password);
         Button loginButton = findViewById(R.id.login);
@@ -57,10 +63,10 @@ public class LoginActivity extends AppCompatActivity {
             public void onChanged(ApiStatus<TokenData> objectApiStatus) {
                 if (objectApiStatus instanceof ApiStatus.Success){
                     Toast.makeText(getApplicationContext(), "로그인에 성공했습니다.", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                    startActivity(intent);
                     TokenData token = ((ApiStatus.Success<TokenData>) objectApiStatus).getData();
                     App.Companion.getPrefs().setIdToken(token.getToken());
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent);
                     finish();
                 }
                 else if (objectApiStatus instanceof ApiStatus.Error){
