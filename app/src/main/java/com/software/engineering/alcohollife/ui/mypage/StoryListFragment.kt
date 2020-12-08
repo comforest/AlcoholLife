@@ -15,7 +15,6 @@ import com.software.engineering.alcohollife.ui.common.AlcoholGridAdapter
 import kotlinx.android.synthetic.main.fragment_recyclerview.*
 
 class StoryListFragment : BaseFragment() {
-    private val model by lazy { RestClient.getDrinkService() }
     private val adapter by lazy { AlcoholGridAdapter() }
 
     override fun onCreateView(
@@ -33,13 +32,7 @@ class StoryListFragment : BaseFragment() {
         recyclerview.adapter = adapter
     }
 
-    override fun onStart() {
-        super.onStart()
-
-        model.getMyReviews().observe(viewLifecycleOwner, Observer {
-            if (it is ApiStatus.Success){
-                adapter.setData(it.data.result)
-            }
-        })
+    fun setData(list : List<AlcoholSimpleData>){
+        adapter.setData(list)
     }
 }

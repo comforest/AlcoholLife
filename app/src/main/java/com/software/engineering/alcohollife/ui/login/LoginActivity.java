@@ -57,7 +57,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    public void login_clicked(String username, String password){
+    public void login_clicked(final String username, String password){
         model.login(new LoginData(username, password)).observe(this, new Observer<ApiStatus<TokenData>>() {
             @Override
             public void onChanged(ApiStatus<TokenData> objectApiStatus) {
@@ -65,6 +65,7 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "로그인에 성공했습니다.", Toast.LENGTH_SHORT).show();
                     TokenData token = ((ApiStatus.Success<TokenData>) objectApiStatus).getData();
                     App.Companion.getPrefs().setIdToken(token.getToken());
+                    App.Companion.getPrefs().setUserName(username);
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intent);
                     finish();

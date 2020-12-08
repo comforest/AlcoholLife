@@ -1,64 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/gray"
+        android:background="@color/white"
         android:orientation="vertical">
 
-    <TextView
+    <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:paddingVertical="20dp"
-            android:paddingLeft="20dp"
-            android:textSize="20sp"
-            tools:text="Alcohol" />
+            android:layout_height="wrap_content">
 
-    <androidx.gridlayout.widget.GridLayout
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#fff"
+                android:orientation="vertical"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="13dp">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ID"
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold" />
+
+            <TextView
+                    android:id="@+id/textview_mypage_username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text="gg"
+                    android:textColor="@color/gray" />
+
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="리뷰 개수"
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold" />
+
+            <TextView
+                    android:id="@+id/textview_mypage_review"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text="1"
+                    android:textColor="@color/gray" />
+
+        </LinearLayout>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_margin="15dp"
+                android:text="로그아웃"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold" />
+    </FrameLayout>
+
+    <View
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:background="@color/white"
-            app:columnCount="3"
-            app:orientation="horizontal"
-            app:rowCount="2"
-            app:useDefaultMargins="true">
+            android:layout_height="1dp"
+            android:background="#ccc" />
 
-        <TextView
-                android:id="@+id/textview_mypage_review"
-                style="@style/MyPageTextDetail"
-                tools:text="120" />
+    <!--    <TextView-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:background="@color/white"-->
+    <!--            android:paddingVertical="20dp"-->
+    <!--            android:paddingLeft="20dp"-->
+    <!--            android:textSize="20sp"-->
+    <!--            android:visibility="gone"-->
+    <!--            tools:text="Alcohol" />-->
 
+    <!--    <androidx.gridlayout.widget.GridLayout-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginTop="10dp"-->
+    <!--            android:background="@color/white"-->
+    <!--            app:columnCount="3"-->
+    <!--            app:orientation="horizontal"-->
+    <!--            app:rowCount="2"-->
+    <!--            app:useDefaultMargins="true">-->
 
-        <TextView
-                android:id="@+id/textview_mypage_story"
-                style="@style/MyPageTextDetail"
-                tools:text="120" />
-
-        <TextView
-                android:id="@+id/textview_mypage_favorite"
-                style="@style/MyPageTextDetail"
-                tools:text="120" />
-
-        <TextView
-                style="@style/MyPageTextDetail"
-                android:text="@string/all_review" />
-
-        <TextView
-                style="@style/MyPageTextDetail"
-                android:text="@string/all_story" />
+    <!--        <TextView-->
+    <!--                android:id="@+id/textview_mypage_review"-->
+    <!--                style="@style/MyPageTextDetail"-->
+    <!--                tools:text="120" />-->
 
 
-        <TextView
-                style="@style/MyPageTextDetail"
-                android:text="@string/all_favorite" />
-    </androidx.gridlayout.widget.GridLayout>
+    <!--        <TextView-->
+    <!--                android:id="@+id/textview_mypage_story"-->
+    <!--                style="@style/MyPageTextDetail"-->
+    <!--                tools:text="120" />-->
 
-    <fragment
+    <!--        <TextView-->
+    <!--                android:id="@+id/textview_mypage_favorite"-->
+    <!--                style="@style/MyPageTextDetail"-->
+    <!--                tools:text="120" />-->
+
+    <!--        <TextView-->
+    <!--                style="@style/MyPageTextDetail"-->
+    <!--                android:text="@string/all_review" />-->
+
+    <!--        <TextView-->
+    <!--                style="@style/MyPageTextDetail"-->
+    <!--                android:text="@string/all_story" />-->
+
+
+    <!--        <TextView-->
+    <!--                style="@style/MyPageTextDetail"-->
+    <!--                android:text="@string/all_favorite" />-->
+    <!--    </androidx.gridlayout.widget.GridLayout>-->
+
+    <FrameLayout
             android:id="@+id/fragment_mypage_review"
-            android:name="com.software.engineering.alcohollife.ui.mypage.StoryListFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
