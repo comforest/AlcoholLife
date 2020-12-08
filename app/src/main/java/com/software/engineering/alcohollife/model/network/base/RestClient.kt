@@ -24,10 +24,11 @@ object RestClient {
 
             val headerInterceptor = object : Interceptor {
                 override fun intercept(chain: Interceptor.Chain): Response {
-                    val request: Request = chain.request().newBuilder()
-                        .addHeader("Authorization", "token ${App.prefs.idToken}")
-                        .build()
-                    return chain.proceed(request)
+                    val request = chain.request().newBuilder()
+                    if(App.prefs.idToken.isNotEmpty()){
+                            request.addHeader("Authorization", "token ${App.prefs.idToken}")
+                    }
+                    return chain.proceed(request.build())
                 }
             }
 
