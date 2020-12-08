@@ -2,6 +2,7 @@ package com.software.engineering.alcohollife.model.network
 
 import com.google.gson.JsonObject
 import com.software.engineering.alcohollife.model.data.CategoryList
+import com.software.engineering.alcohollife.model.data.LoginData
 import com.software.engineering.alcohollife.model.data.SignUpData
 import com.software.engineering.alcohollife.model.network.base.ApiLiveData
 import retrofit2.Call
@@ -24,6 +25,11 @@ interface DrinkRetrofit {
     @POST("manageuser/user/")
     fun signUp(
             @Body data: SignUpData
+    ): ApiLiveData<Any>
+
+    @POST("manageuser/login/")
+    fun login(
+            @Body loginData: LoginData
     ): ApiLiveData<Any>
 
 }

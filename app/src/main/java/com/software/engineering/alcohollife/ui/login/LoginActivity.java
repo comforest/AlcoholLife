@@ -1,6 +1,7 @@
 package com.software.engineering.alcohollife.ui.login;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -12,9 +13,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.software.engineering.alcohollife.R;
+import com.software.engineering.alcohollife.model.data.LoginData;
+import com.software.engineering.alcohollife.model.data.SignUpData;
+import com.software.engineering.alcohollife.model.network.DrinkRetrofit;
+import com.software.engineering.alcohollife.model.network.base.ApiStatus;
+import com.software.engineering.alcohollife.model.network.base.RestClient;
 import com.software.engineering.alcohollife.ui.main.MainActivity;
 
 public class LoginActivity extends AppCompatActivity {
+    private DrinkRetrofit model = RestClient.INSTANCE.getDrinkService();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,9 +50,20 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void login_clicked(String username, String password){
-        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-        startActivity(intent);
-        finish();
+        model.login(new LoginData(username, password)).observe(this, new Observer<ApiStatus<Object>>() {
+            @Override
+            public void onChanged(ApiStatus<Object> objectApiStatus) {
+                if (objectApiStatus instanceof ApiStatus.Success){
+                    Toast.makeText(getApplicationContext(), "로그인에 성공했습니다.", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+                else if (objectApiStatus instanceof ApiStatus.Error){
+                    Toast.makeText(getApplicationContext(), "아이디와 비밀번호를 확인해주세요.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     public void signup_clicked(){
