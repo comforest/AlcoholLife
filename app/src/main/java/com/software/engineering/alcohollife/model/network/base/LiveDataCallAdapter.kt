@@ -11,7 +11,8 @@ import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
 
 
-class LiveDataCallAdapter<R>(private val responseType: Type) : CallAdapter<R, LiveData<ApiStatus<R>>> {
+class LiveDataCallAdapter<R>(private val responseType: Type) :
+    CallAdapter<R, LiveData<ApiStatus<R>>> {
     override fun responseType(): Type = responseType
 
     override fun adapt(call: Call<R>): LiveData<ApiStatus<R>> {
@@ -40,7 +41,7 @@ class LiveDataCallAdapter<R>(private val responseType: Type) : CallAdapter<R, Li
                         }
                     }
                 }
-                }
+            }
 
         })
 
@@ -48,7 +49,11 @@ class LiveDataCallAdapter<R>(private val responseType: Type) : CallAdapter<R, Li
     }
 
     class Factory : CallAdapter.Factory() {
-        override fun get(returnType: Type, annotations: Array<Annotation>, retrofit: Retrofit): CallAdapter<*, *>? {
+        override fun get(
+            returnType: Type,
+            annotations: Array<Annotation>,
+            retrofit: Retrofit
+        ): CallAdapter<*, *>? {
             if (getRawType(returnType) != LiveData::class.java) {
                 return null
             }

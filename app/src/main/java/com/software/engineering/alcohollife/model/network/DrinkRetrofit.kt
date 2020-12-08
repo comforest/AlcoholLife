@@ -38,11 +38,11 @@ interface DrinkRetrofit {
     @POST("manageuser/user/")
     fun signUp(
         @Body data: SignUpData
-    ): ApiLiveData<Any>
+    ): ApiLiveData<Any?>
 
     @POST("manageuser/login/")
     fun login(
         @Body loginData: LoginData
-    ): ApiLiveData<Any>
+    ): ApiLiveData<TokenData>
 
 }
