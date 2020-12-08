@@ -9,10 +9,11 @@ import com.software.engineering.alcohollife.R
 import com.software.engineering.alcohollife.model.data.AlcoholSimpleData
 import com.software.engineering.alcohollife.ui.base.BaseViewHolder
 import kotlinx.android.synthetic.main.item_alcohol_grid_card.*
-import kotlinx.android.synthetic.main.item_category.*
 
 class AlcoholGridAdapter : RecyclerView.Adapter<BaseViewHolder>() {
     private var list: List<AlcoholSimpleData>? = null
+    private var onItemClickListener: ((AlcoholSimpleData) -> Unit)? = null
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
         val v = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_alcohol_grid_card, parent, false)
@@ -22,8 +23,8 @@ class AlcoholGridAdapter : RecyclerView.Adapter<BaseViewHolder>() {
 
     override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
         val data = list!![position]
-        when(holder){
-            is GridViewHolder ->{
+        when (holder) {
+            is GridViewHolder -> {
                 Glide.with(holder.containerView)
                     .load(data.image)
                     .into(holder.imageview_alcohol)
@@ -40,5 +41,15 @@ class AlcoholGridAdapter : RecyclerView.Adapter<BaseViewHolder>() {
         notifyDataSetChanged()
     }
 
-    class GridViewHolder(v: View) : BaseViewHolder(v)
+    fun setOnItemClickListener(listener: ((AlcoholSimpleData) -> Unit)?) {
+        onItemClickListener = listener
+    }
+
+    inner class GridViewHolder(v: View) : BaseViewHolder(v) {
+        init {
+            v.setOnClickListener {
+                onItemClickListener?.invoke(list!![adapterPosition])
+            }
+        }
+    }
 }

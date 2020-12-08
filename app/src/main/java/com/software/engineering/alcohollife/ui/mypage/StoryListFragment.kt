@@ -12,6 +12,7 @@ import com.software.engineering.alcohollife.model.network.base.ApiStatus
 import com.software.engineering.alcohollife.model.network.base.RestClient
 import com.software.engineering.alcohollife.ui.base.BaseFragment
 import com.software.engineering.alcohollife.ui.common.AlcoholGridAdapter
+import com.software.engineering.alcohollife.ui.review.ItemPage
 import kotlinx.android.synthetic.main.fragment_recyclerview.*
 
 class StoryListFragment : BaseFragment() {
@@ -30,6 +31,11 @@ class StoryListFragment : BaseFragment() {
         recyclerview.layoutManager = GridLayoutManager(context, 2)
 //        recyclerview.layoutManager = LinearLayoutManager(context)
         recyclerview.adapter = adapter
+
+        adapter.setOnItemClickListener {
+            val intent = ItemPage.getStartIntent(context, it.name)
+            startActivity(intent)
+        }
     }
 
     fun setData(list : List<AlcoholSimpleData>){

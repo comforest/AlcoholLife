@@ -1,15 +1,12 @@
 package com.software.engineering.alcohollife.ui.common.item
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.software.engineering.alcohollife.R
-import com.software.engineering.alcohollife.model.data.CategoryData
 import com.software.engineering.alcohollife.model.network.base.ApiStatus
 import com.software.engineering.alcohollife.model.network.base.RestClient
 import com.software.engineering.alcohollife.ui.base.BaseFragment
@@ -34,7 +31,7 @@ class ItemListFragment private constructor(): BaseFragment() {
         view.recyclerview.layoutManager = LinearLayoutManager(context)
         view.recyclerview.adapter = adapter
 
-        adapter.setOnitemClickListener {
+        adapter.setOnItemClickListener {
             val intent = ItemPage.getStartIntent(context, it.name)
             startActivity(intent)
         }

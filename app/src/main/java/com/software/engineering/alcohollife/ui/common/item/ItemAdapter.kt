@@ -36,10 +36,6 @@ class ItemAdapter : RecyclerView.Adapter<ItemAdapter.CategoryViewHolder>() {
 
         holder.textview_category_rating_score.text = data.rating.toString()
         holder.textview_category_rating_voter.text = ""
-
-        holder.containerView.setOnClickListener {
-            onItemClickListener?.invoke(data)
-        }
     }
 
     fun setData(list: List<CategoryData>) {
@@ -47,9 +43,15 @@ class ItemAdapter : RecyclerView.Adapter<ItemAdapter.CategoryViewHolder>() {
         notifyDataSetChanged()
     }
 
-    fun setOnitemClickListener(listener: ((CategoryData) -> Unit)?) {
+    fun setOnItemClickListener(listener: ((CategoryData) -> Unit)?) {
         onItemClickListener = listener
     }
 
-    inner class CategoryViewHolder(v: View) : BaseViewHolder(v)
+    inner class CategoryViewHolder(v: View) : BaseViewHolder(v){
+        init {
+            v.setOnClickListener {
+                onItemClickListener?.invoke(list!![adapterPosition])
+            }
+        }
+    }
 }
