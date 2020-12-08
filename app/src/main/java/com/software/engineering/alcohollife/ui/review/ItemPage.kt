@@ -8,6 +8,7 @@ import android.widget.TextView
 import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.software.engineering.alcohollife.R
@@ -34,6 +35,12 @@ class ItemPage : AppCompatActivity() {
         val ab = supportActionBar!!
         ab.setDisplayShowTitleEnabled(false)
         ab.setDisplayHomeAsUpEnabled(true)
+
+        val floatingActionButton = findViewById<FloatingActionButton>(R.id.floatingActionButton2)
+        floatingActionButton.setOnClickListener{
+            val intent = Intent(this, WriteReview::class.java)
+            startActivity(intent)
+        }
 
 
         val call = model.getAlcohol(name)
