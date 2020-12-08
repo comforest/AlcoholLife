@@ -12,9 +12,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.software.engineering.alcohollife.App;
 import com.software.engineering.alcohollife.R;
 import com.software.engineering.alcohollife.model.data.LoginData;
 import com.software.engineering.alcohollife.model.data.SignUpData;
+import com.software.engineering.alcohollife.model.data.TokenData;
 import com.software.engineering.alcohollife.model.network.DrinkRetrofit;
 import com.software.engineering.alcohollife.model.network.base.ApiStatus;
 import com.software.engineering.alcohollife.model.network.base.RestClient;
@@ -27,6 +29,12 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        if(!App.Companion.getPrefs().getIdToken().isEmpty()){
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
 
         final EditText usernameEditText = findViewById(R.id.username);
         final EditText passwordEditText = findViewById(R.id.password);
@@ -50,11 +58,13 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void login_clicked(String username, String password){
-        model.login(new LoginData(username, password)).observe(this, new Observer<ApiStatus<Object>>() {
+        model.login(new LoginData(username, password)).observe(this, new Observer<ApiStatus<TokenData>>() {
             @Override
-            public void onChanged(ApiStatus<Object> objectApiStatus) {
+            public void onChanged(ApiStatus<TokenData> objectApiStatus) {
                 if (objectApiStatus instanceof ApiStatus.Success){
                     Toast.makeText(getApplicationContext(), "로그인에 성공했습니다.", Toast.LENGTH_SHORT).show();
+                    TokenData token = ((ApiStatus.Success<TokenData>) objectApiStatus).getData();
+                    App.Companion.getPrefs().setIdToken(token.getToken());
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intent);
                     finish();
